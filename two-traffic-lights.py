@@ -10,7 +10,7 @@ def setup():
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
     GPIO.setup(portList, GPIO.OUT)
-    GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP) # push button
+    GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP) # push butto
 
 def run():
     try:
