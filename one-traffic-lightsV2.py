@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 import time
 
-portList = [23, 24, 25] # verde1, amarillo1, rojo1 
+portList = [23, 24, 25] # green, yellow, red 
 
 def setup():
     GPIO.setmode(GPIO.BCM)
