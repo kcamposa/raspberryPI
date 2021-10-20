@@ -19,7 +19,7 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
-    GPIO.output(portList, GPIO.LOW)
+    GPIO.output(portList, GPIO.LOW) # reset colors
     for port in portList:
         [print("ON Green LED ") if port==23 else print("ON Yellow LED") if port==24 else print("ON Red LED")]
         GPIO.output(port, GPIO.HIGH)
