@@ -4,7 +4,7 @@ from gpiozero import Buzzer
 import time
 
 buzzer = Buzzer(16)
-portList = [23, 24, 25, 13, 19, 26] # green1, yellow1, red1 ------- green2, yellow2, red2
+portList = [23, 24, 25, 22, 13, 19, 26] # green1, yellow1, red1 ------- green2, yellow2, red2
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -68,8 +68,7 @@ def intermittentLED(led):
         GPIO.output(led, GPIO.LOW)
         time.sleep(.5)
 
-def pushedButton(): # crosswalk
-    if GPIO.input(6) == GPIO.LOW:
+def pushedButton(): # crosswalk     
         GPIO.output(portList, GPIO.LOW)
         for i in range(5):
             GPIO.output(24, GPIO.HIGH)
