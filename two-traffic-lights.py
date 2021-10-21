@@ -24,42 +24,31 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
-    # green 1
+    GPIO.output(portList, GPIO.LOW)
+
+    # green 1 and red 2
     GPIO.output(23, GPIO.HIGH)
-    #GPIO.output(24, GPIO.LOW)
-    #GPIO.output(25, GPIO.LOW)
-    pushedButton()
-    # red 2
-    #GPIO.output(13, GPIO.LOW)
-    #GPIO.output(19, GPIO.LOW)
     GPIO.output(26, GPIO.HIGH)
-    time.sleep(5)  
-    pushedButton()
-    # yellow 1
-    GPIO.output(23, GPIO.LOW)
+    time.sleep(5)
+
+    GPIO.output(23, GPIO.LOW) # green 1 off
+
+    # yellow 1, intermittent yellow 1
     GPIO.output(24, GPIO.HIGH)
-    GPIO.output(25, GPIO.LOW)
-    # red 2 --- intermittentLED
     time.sleep(2)
     intermittentLED(24)
-    pushedButton()
-    # red 1
-    GPIO.output(23, GPIO.LOW)
-    GPIO.output(24, GPIO.LOW)
+
+    GPIO.output(26, GPIO.LOW) # red 2 off
+
+    # red 1 and green 2
     GPIO.output(25, GPIO.HIGH)
-    pushedButton()
-    # green 2
     GPIO.output(13, GPIO.HIGH)
-    GPIO.output(19, GPIO.LOW)
-    GPIO.output(26, GPIO.LOW)
     time.sleep(5)
-    pushedButton()
-    # yellow 2
-    GPIO.output(13, GPIO.LOW)
+
+    GPIO.output(13, GPIO.LOW) # green 2 off
+
+    # yellow 2, intermittent yellow 2
     GPIO.output(19, GPIO.HIGH)
-    GPIO.output(26, GPIO.LOW)
-    pushedButton()
-    # red 1 --- intermittentLED
     time.sleep(2)
     intermittentLED(19)
 
@@ -87,7 +76,6 @@ def pushedButton(): # crosswalk
         time.sleep(7)
         buzzer.off()
         run()
-
 
 setup()
 run()
