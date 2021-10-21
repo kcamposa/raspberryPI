@@ -22,7 +22,7 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
-    # verde 1
+    # green 1
     GPIO.output(23, GPIO.HIGH)
     GPIO.output(24, GPIO.LOW)
     GPIO.output(25, GPIO.LOW)
@@ -37,7 +37,7 @@ def led_virtual_switch():
     GPIO.output(23, GPIO.LOW)
     GPIO.output(24, GPIO.HIGH)
     GPIO.output(25, GPIO.LOW)
-    # red 2 --- parpadeante
+    # red 2 --- intermittentLED
     time.sleep(2)
     intermittentLED(24)
     pushedButton()
@@ -57,7 +57,7 @@ def led_virtual_switch():
     GPIO.output(19, GPIO.HIGH)
     GPIO.output(26, GPIO.LOW)
     pushedButton()
-    # red 1 --- parpadeante
+    # red 1 --- intermittentLED
     time.sleep(2)
     intermittentLED(19)
 
