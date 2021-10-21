@@ -1,10 +1,9 @@
-
 import RPi.GPIO as GPIO
 from gpiozero import Buzzer
 import time
 
 buzzer = Buzzer(16)
-portList = [23, 24, 25, 22, 13, 19, 26] # green1, yellow1, red1 ------- green2, yellow2, red2
+portList = [23, 24, 25, 13, 19, 26] # green1, yellow1, red1 ------- green2, yellow2, red2
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -22,7 +21,7 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
-    # verde 1
+    # green 1
     GPIO.output(23, GPIO.HIGH)
     GPIO.output(24, GPIO.LOW)
     GPIO.output(25, GPIO.LOW)
@@ -37,7 +36,7 @@ def led_virtual_switch():
     GPIO.output(23, GPIO.LOW)
     GPIO.output(24, GPIO.HIGH)
     GPIO.output(25, GPIO.LOW)
-    # red 2 --- parpadeante
+    # red 2 --- intermittentLED
     time.sleep(2)
     intermittentLED(24)
     pushedButton()
@@ -57,7 +56,7 @@ def led_virtual_switch():
     GPIO.output(19, GPIO.HIGH)
     GPIO.output(26, GPIO.LOW)
     pushedButton()
-    # red 1 --- parpadeante
+    # red 1 --- intermittentLED
     time.sleep(2)
     intermittentLED(19)
 
@@ -68,7 +67,8 @@ def intermittentLED(led):
         GPIO.output(led, GPIO.LOW)
         time.sleep(.5)
 
-def pushedButton(): # crosswalk     
+def pushedButton(): # crosswalk
+    if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
         for i in range(5):
             GPIO.output(24, GPIO.HIGH)
