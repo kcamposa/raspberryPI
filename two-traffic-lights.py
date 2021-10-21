@@ -1,3 +1,6 @@
+
+#### ---------------------------------------------------------------------------------  TESTING BRANCH ---------------------------------------------------------------------------------
+
 import RPi.GPIO as GPIO
 from gpiozero import Buzzer
 import time
@@ -23,12 +26,12 @@ def run():
 def led_virtual_switch():
     # green 1
     GPIO.output(23, GPIO.HIGH)
-    GPIO.output(24, GPIO.LOW)
-    GPIO.output(25, GPIO.LOW)
+    #GPIO.output(24, GPIO.LOW)
+    #GPIO.output(25, GPIO.LOW)
     pushedButton()
     # red 2
-    GPIO.output(13, GPIO.LOW)
-    GPIO.output(19, GPIO.LOW)
+    #GPIO.output(13, GPIO.LOW)
+    #GPIO.output(19, GPIO.LOW)
     GPIO.output(26, GPIO.HIGH)
     time.sleep(5)  
     pushedButton()
