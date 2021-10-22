@@ -53,12 +53,12 @@ def led_virtual_switch():
 def Crosswalk(): # crosswalk
     if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
-        IntermittentLED(24,19)
+        IntermittentLED(24,19) # intermittent yellow 1 and 2
         GPIO.output(portList, GPIO.LOW)
         #buzzer.beep()
         LEDsON(25,26) # red 1 and 2 on
         time.sleep(7)
-        IntermittentLED(25,26)
+        IntermittentLED(25,26) # intermittent red 1 and 2
         #buzzer.off()
         run()
 
