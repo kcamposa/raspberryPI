@@ -31,6 +31,7 @@ def led_virtual_switch():
     Crosswalk()
     LEDsOFF(23,0) # green 1 off
     
+    Crosswalk()
     LEDsON(24,0) # yellow 1 on
     time.sleep(2)
     IntermittentLED(24) # intermittent yellow 1
