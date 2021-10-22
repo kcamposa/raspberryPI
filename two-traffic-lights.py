@@ -26,39 +26,39 @@ def run():
 def led_virtual_switch():
     GPIO.output(portList, GPIO.LOW)
 
-    pushedButton()
+    Crosswalk()
     LEDsON(23,26) # green 1 and red 2 on
     time.sleep(5)
 
-    pushedButton()
+    Crosswalk()
     LEDsOFF(23,0) # green 1 off
     
     LEDsON(24,0) # yellow 1 on
     time.sleep(2)
-    intermittentLED(24) # intermittent yellow 1
+    IntermittentLED(24) # intermittent yellow 1
 
-    pushedButton()
+    Crosswalk()
     LEDsOFF(26,0) # red 2 off
 
-    pushedButton()
+    Crosswalk()
     LEDsON(25,13) # red 1 and green 2 on
     time.sleep(5)
 
     LEDsOFF(13,0) # green 2 off
 
-    pushedButton()
+    Crosswalk()
     LEDsON(19,0) # yellow 2 on
     time.sleep(2)
-    intermittentLED(19) # intermittent yellow 2
+    IntermittentLED(19) # intermittent yellow 2
 
-def intermittentLED(led):
+def IntermittentLED(led):
     for i in range(5):
         GPIO.output(led, GPIO.HIGH)
         time.sleep(.5)
         GPIO.output(led, GPIO.LOW)
         time.sleep(.5)
 
-def pushedButton(): # crosswalk
+def Crosswalk(): # crosswalk
     if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
         for i in range(5):
