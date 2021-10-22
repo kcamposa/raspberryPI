@@ -25,28 +25,28 @@ def ChangingLights():
     GPIO.output(portList, GPIO.LOW)
 
     Crosswalk()
-    LEDsON(23,26) # green 1 and red 2 on
+    LEDsON(23,26) # green 1 and red 2 ON
     time.sleep(5)
 
     Crosswalk()
-    LEDsOFF(23,0) # green 1 off
+    LEDsOFF(23,0) # green 1 OFF
     
     Crosswalk()
-    LEDsON(24,0) # yellow 1 on
+    LEDsON(24,0) # yellow 1 ON
     time.sleep(2)
     IntermittentLEDs(24,0) # intermittent yellow 1
 
     Crosswalk()
-    LEDsOFF(26,0) # red 2 off
+    LEDsOFF(26,0) # red 2 OFF
 
     Crosswalk()
-    LEDsON(25,13) # red 1 and green 2 on
+    LEDsON(25,13) # red 1 and green 2 ON
     time.sleep(5)
 
-    LEDsOFF(13,0) # green 2 off
+    LEDsOFF(13,0) # green 2 OFF
 
     Crosswalk()
-    LEDsON(19,0) # yellow 2 on
+    LEDsON(19,0) # yellow 2 ON
     time.sleep(2)
     IntermittentLEDs(19,0) # intermittent yellow 2
 
@@ -62,21 +62,21 @@ def Crosswalk(): # crosswalk
         #buzzer.off()
         run()
 
-def LEDsON(led1, led2): # on led or leds
+def LEDsON(led1, led2): # ON led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.HIGH)
         GPIO.output(led2, GPIO.HIGH)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.HIGH)
 
-def LEDsOFF(led1, led2): # off led or leds
+def LEDsOFF(led1, led2): # OFF led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.LOW)
         GPIO.output(led2, GPIO.LOW)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.LOW)
 
-def IntermittentLEDs(led1, led2): # on intermittent led or leds
+def IntermittentLEDs(led1, led2): # ON intermittent led or leds
     if led1 != 0 and led2 !=0:
         for i in range(5):
             LEDsON(led1,led2)
