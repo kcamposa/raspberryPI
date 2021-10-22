@@ -15,13 +15,13 @@ def setup():
 def run():
     try:
         while True:
-            led_virtual_switch()
+            ChangingLights()
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Stop running")
     GPIO.cleanup()
 
-def led_virtual_switch():
+def ChangingLights():
     GPIO.output(portList, GPIO.LOW)
 
     Crosswalk()
@@ -89,6 +89,6 @@ def IntermittentLEDs(led1, led2):
             time.sleep(.5)
             LEDsOFF(led1,0) # yellow 1 and 2 off intermittent
             time.sleep(.5)
-            
+
 setup()
 run()
