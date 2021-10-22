@@ -27,8 +27,7 @@ def led_virtual_switch():
     GPIO.output(portList, GPIO.LOW)
 
     # green 1 and red 2
-    GPIO.output(23, GPIO.HIGH)
-    GPIO.output(26, GPIO.HIGH)
+    LEDs(23, 26)
     time.sleep(5)
 
     GPIO.output(23, GPIO.LOW) # green 1 off
@@ -41,8 +40,7 @@ def led_virtual_switch():
     GPIO.output(26, GPIO.LOW) # red 2 off
 
     # red 1 and green 2
-    GPIO.output(25, GPIO.HIGH)
-    GPIO.output(13, GPIO.HIGH)
+    LEDs(25, 13)
     time.sleep(5)
 
     GPIO.output(13, GPIO.LOW) # green 2 off
@@ -77,6 +75,9 @@ def pushedButton(): # crosswalk
         buzzer.off()
         run()
 
+def LEDs(led1, led2):
+    GPIO.output(led1, GPIO.HIGH)
+    GPIO.output(led2, GPIO.HIGH)
 
 setup()
 run()
