@@ -24,7 +24,6 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
-
     GPIO.output(portList, GPIO.LOW)
 
     pushedButton()
