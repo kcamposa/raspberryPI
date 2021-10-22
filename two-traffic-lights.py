@@ -34,7 +34,7 @@ def led_virtual_switch():
     Crosswalk()
     LEDsON(24,0) # yellow 1 on
     time.sleep(2)
-    IntermittentLED(24) # intermittent yellow 1
+    IntermittentLED(24,0) # intermittent yellow 1
 
     Crosswalk()
     LEDsOFF(26,0) # red 2 off
@@ -48,29 +48,33 @@ def led_virtual_switch():
     Crosswalk()
     LEDsON(19,0) # yellow 2 on
     time.sleep(2)
-    IntermittentLED(19) # intermittent yellow 2
-
-def IntermittentLED(led):
-    for i in range(5):
-        GPIO.output(led, GPIO.HIGH)
-        time.sleep(.5)
-        GPIO.output(led, GPIO.LOW)
-        time.sleep(.5)
+    IntermittentLED(19,0) # intermittent yellow 2
 
 def Crosswalk(): # crosswalk
     if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
-        for i in range(5):
-            LEDsON(24,19) # yellow 1 and 2 on intermittent
-            time.sleep(.5)
-            LEDsOFF(24,19) # yellow 1 and 2 off intermittent
-            time.sleep(.5)
+        IntermittentLED(24,19)
         GPIO.output(portList, GPIO.LOW)
         #buzzer.beep()
         LEDsON(25,26) # red 1 and 2 on
         time.sleep(7)
+        IntermittentLED(25,26)
         #buzzer.off()
         run()
+
+def IntermittentLED(led1, led2):
+    if led1 != 0 and led2 !=0:
+        for i in range(5):
+            LEDsON(led1,led2) # yellow 1 and 2 on intermittent
+            time.sleep(.5)
+            LEDsOFF(led1,led2) # yellow 1 and 2 off intermittent
+            time.sleep(.5)
+    elif led1 != 0 and led2 == 0:
+        for i in range(5):
+            LEDsON(led1,0) # yellow 1 and 2 on intermittent
+            time.sleep(.5)
+            LEDsOFF(led1,0) # yellow 1 and 2 off intermittent
+            time.sleep(.5)
 
 def LEDsON(led1, led2):
     if led1 != 0 and led2 !=0:     
