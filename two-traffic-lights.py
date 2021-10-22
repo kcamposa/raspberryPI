@@ -47,7 +47,6 @@ def led_virtual_switch():
 
     LEDsOFF(13,0) # green 2 off
 
-    # yellow 2, intermittent yellow 2
     pushedButton()
     LEDsON(19,0) # yellow 2 on
     time.sleep(2)
