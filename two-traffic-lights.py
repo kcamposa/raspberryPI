@@ -62,32 +62,32 @@ def Crosswalk(): # crosswalk
         #buzzer.off()
         run()
 
-def LEDsON(led1, led2):
+def LEDsON(led1, led2): # on led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.HIGH)
         GPIO.output(led2, GPIO.HIGH)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.HIGH)
 
-def LEDsOFF(led1, led2):
+def LEDsOFF(led1, led2): # off led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.LOW)
         GPIO.output(led2, GPIO.LOW)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.LOW)
 
-def IntermittentLEDs(led1, led2):
+def IntermittentLEDs(led1, led2): # on intermittent led or leds
     if led1 != 0 and led2 !=0:
         for i in range(5):
-            LEDsON(led1,led2) # yellow 1 and 2 on intermittent
+            LEDsON(led1,led2)
             time.sleep(.5)
-            LEDsOFF(led1,led2) # yellow 1 and 2 off intermittent
+            LEDsOFF(led1,led2)
             time.sleep(.5)
     elif led1 != 0 and led2 == 0:
         for i in range(5):
-            LEDsON(led1,0) # yellow 1 and 2 on intermittent
+            LEDsON(led1,0)
             time.sleep(.5)
-            LEDsOFF(led1,0) # yellow 1 and 2 off intermittent
+            LEDsOFF(led1,0)
             time.sleep(.5)
 
 setup()
