@@ -27,7 +27,7 @@ def led_virtual_switch():
     GPIO.output(portList, GPIO.LOW)
 
     pushedButton()
-    LEDsON(23,26) # green 1 and red 2
+    LEDsON(23,26) # green 1 and red 2 on
     time.sleep(5)
 
     pushedButton()
@@ -41,7 +41,7 @@ def led_virtual_switch():
     LEDsOFF(26,0) # red 2 off
 
     pushedButton()
-    LEDsON(25,13) # red 1 and green 2
+    LEDsON(25,13) # red 1 and green 2 on
     time.sleep(5)
 
     LEDsOFF(13,0) # green 2 off
