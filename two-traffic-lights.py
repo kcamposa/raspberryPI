@@ -24,31 +24,34 @@ def run():
     GPIO.cleanup()
 
 def led_virtual_switch():
+
     GPIO.output(portList, GPIO.LOW)
 
-    # green 1 and red 2
-    LEDs(23, 26)
+    pushedButton()
+    LEDsON(23,26) # green 1 and red 2
     time.sleep(5)
 
-    GPIO.output(23, GPIO.LOW) # green 1 off
-
-    # yellow 1, intermittent yellow 1
-    GPIO.output(24, GPIO.HIGH)
+    pushedButton()
+    LEDsOFF(23,0) # green 1 off
+    
+    LEDsON(24,0) # yellow 1 on
     time.sleep(2)
-    intermittentLED(24)
+    intermittentLED(24) # intermittent yellow 1
 
-    GPIO.output(26, GPIO.LOW) # red 2 off
+    pushedButton()
+    LEDsOFF(26,0) # red 2 off
 
-    # red 1 and green 2
-    LEDs(25, 13)
+    pushedButton()
+    LEDsON(25,13) # red 1 and green 2
     time.sleep(5)
 
-    GPIO.output(13, GPIO.LOW) # green 2 off
+    LEDsOFF(13,0) # green 2 off
 
     # yellow 2, intermittent yellow 2
-    GPIO.output(19, GPIO.HIGH)
+    pushedButton()
+    LEDsON(19,0) # yellow 2 on
     time.sleep(2)
-    intermittentLED(19)
+    intermittentLED(19) # intermittent yellow 2
 
 def intermittentLED(led):
     for i in range(5):
@@ -61,23 +64,30 @@ def pushedButton(): # crosswalk
     if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
         for i in range(5):
-            GPIO.output(24, GPIO.HIGH)
-            GPIO.output(19, GPIO.HIGH)
+            LEDsON(24,19) # yellow 1 and 2 on intermittent
             time.sleep(.5)
-            GPIO.output(24, GPIO.LOW)
-            GPIO.output(19, GPIO.LOW)
+            LEDsOFF(24,19) # yellow 1 and 2 off intermittent
             time.sleep(.5)
         GPIO.output(portList, GPIO.LOW)
-        buzzer.beep()
-        GPIO.output(25, GPIO.HIGH)
-        GPIO.output(26, GPIO.HIGH)
+        #buzzer.beep()
+        LEDsON(25,26) # red 1 and 2 on
         time.sleep(7)
-        buzzer.off()
+        #buzzer.off()
         run()
 
-def LEDs(led1, led2):
-    GPIO.output(led1, GPIO.HIGH)
-    GPIO.output(led2, GPIO.HIGH)
+def LEDsON(led1, led2):
+    if led1 != 0 and led2 !=0:     
+        GPIO.output(led1, GPIO.HIGH)
+        GPIO.output(led2, GPIO.HIGH)
+    elif led1 != 0 and led2 == 0:
+        GPIO.output(led1, GPIO.HIGH)
+
+def LEDsOFF(led1, led2):
+    if led1 != 0 and led2 !=0:     
+        GPIO.output(led1, GPIO.LOW)
+        GPIO.output(led2, GPIO.LOW)
+    elif led1 != 0 and led2 == 0:
+        GPIO.output(led1, GPIO.LOW)
 
 setup()
 run()
