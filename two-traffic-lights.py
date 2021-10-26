@@ -15,7 +15,10 @@ def setup():
 def run():
     try:
         while True:
-            ChangingLights()
+            input_state=GPIO.input(6)
+            if input_state == False:
+                ChangingLights()
+            
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Stop running")
@@ -33,7 +36,7 @@ def ChangingLights():
     time.sleep(2)
 
     IntermittentLEDs(24,0) # intermittent yellow 1
-    
+
     LEDsOFF(26,0) # red 2 OFF
     LEDsON(25,13) # red 1 and green 2 ON
     time.sleep(5)
