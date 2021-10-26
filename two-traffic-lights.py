@@ -22,35 +22,29 @@ def run():
     GPIO.cleanup()
 
 def ChangingLights():
+
     GPIO.output(portList, GPIO.LOW)
 
     LEDsON(23,26) # green 1 and red 2 ON
-    Crosswalk()
     time.sleep(5)
 
-    Crosswalk()
     LEDsOFF(23,0) # green 1 OFF
-     
     LEDsON(24,0) # yellow 1 ON
-    Crosswalk()
     time.sleep(2)
+
     IntermittentLEDs(24,0) # intermittent yellow 1
-
-    Crosswalk()
+    
     LEDsOFF(26,0) # red 2 OFF
-
     LEDsON(25,13) # red 1 and green 2 ON
-    Crosswalk()
     time.sleep(5)
 
     LEDsOFF(13,0) # green 2 OFF
-
     LEDsON(19,0) # yellow 2 ON
-    Crosswalk()
     time.sleep(2)
+
     IntermittentLEDs(19,0) # intermittent yellow 2
 
-def Crosswalk(): # crosswalk
+def Crosswalk(): 
     if GPIO.input(6) == GPIO.LOW:
         GPIO.output(portList, GPIO.LOW)
         IntermittentLEDs(24,19) # intermittent yellow 1 and 2
@@ -89,6 +83,11 @@ def IntermittentLEDs(led1, led2): # ON intermittent led or leds
             time.sleep(.5)
             LEDsOFF(led1,0)
             time.sleep(.5)
+
+
+def know_state():
+    input_state=GPIO.input(6)
+
 
 setup()
 run()
