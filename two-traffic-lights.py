@@ -15,7 +15,7 @@ def setup():
     GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP) # push button
     GPIO.add_event_detect(6, GPIO.RISING, callback=CaptureSignal)
 
-def run():
+def main():
     try:
         while True:
             ChangingLights()
@@ -91,4 +91,4 @@ def Intermittent_LEDs(led1, led2): # ON intermittent led or leds
 
 
 setup()
-run()
+main()
