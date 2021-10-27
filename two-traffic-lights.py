@@ -36,6 +36,9 @@ def run():
         GPIO.cleanup()
         print("Stop running")
     GPIO.cleanup()
+# --------------------------------
+
+
 
 def ChangingLights(signal):
 
