@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from gpiozero import Buzzer
 import time
 
-sig = 1
+sig = False
 buzzer = Buzzer(16)
 portList = [23, 24, 25, 13, 19, 26] # green1, yellow1, red1 ------- green2, yellow2, red2
 
@@ -13,43 +13,56 @@ def setup():
     GPIO.setup(portList, GPIO.OUT)
     GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP) # push button
 
+
+
+
+# -------- testing this function 
 def run():
     try:
         while True:
-            ChangingLights()
+            input_state=GPIO.input(6)
+            if input_state == 1:
+                sig = False
+                #print(sig)
+                ChangingLights(sig)
+                time.sleep(.3)
+            else:
+                sig = True
+                #print(sig)
+                ChangingLights(sig)
+                time.sleep(.1)
+            time.sleep(.2)
     except KeyboardInterrupt:
         GPIO.cleanup()
         print("Stop running")
     GPIO.cleanup()
 
-def ChangingLights():
+def ChangingLights(signal):
 
     GPIO.output(portList, GPIO.LOW)
 
     LEDsON(23,26) # green 1 and red 2 ON
-    CaptureSignal()
     time.sleep(5)
 
     LEDsOFF(23,0) # green 1 OFF
     LEDsON(24,0) # yellow 1 ON
-    CaptureSignal()
     time.sleep(2)
 
     IntermittentLEDs(24,0) # intermittent yellow 1
-    CaptureSignal()
 
     LEDsOFF(26,0) # red 2 OFF
     LEDsON(25,13) # red 1 and green 2 ON
+    #if signal:
+    #    buzzer.beep()
     time.sleep(5)
 
     LEDsOFF(13,0) # green 2 OFF
+    buzzer.beep()
     LEDsON(19,0) # yellow 2 ON
-    CaptureSignal()
     time.sleep(2)
 
-    buzzer.off()
+    #buzzer.off()
     IntermittentLEDs(19,0) # intermittent yellow 2
-    CaptureSignal()
 
 def CaptureSignal(): 
     input_state=GPIO.input(6)
