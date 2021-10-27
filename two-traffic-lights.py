@@ -56,10 +56,10 @@ def CaptureSignal(channel): # capture the signal if the button was pushed
 
 def activeCrosswalk(): # active the crosswalk 
     global sig 
-    if sig == True:
+    if sig == 1:
         LEDs_ON(22,0)
         buzzer.beep()
-        sig = False        
+        sig = 0        
 
 def LEDs_ON(led1, led2): # ON led or leds
     if led1 != 0 and led2 !=0:     
