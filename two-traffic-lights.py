@@ -28,66 +28,65 @@ def ChangingLights():
 
     GPIO.output(portList, GPIO.LOW)
 
-    LEDsON(23,26) # green 1 and red 2 ON
+    LEDs_ON(23,26) # green 1 and red 2 ON
     time.sleep(5)
 
-    LEDsOFF(23,0) # green 1 OFF
-    LEDsON(24,0) # yellow 1 ON
+    LEDs_OFF(23,0) # green 1 OFF
+    LEDs_ON(24,0) # yellow 1 ON
     time.sleep(2)
 
-    IntermittentLEDs(24,0) # intermittent yellow 1
+    Intermittent_LEDs(24,0) # intermittent yellow 1
 
-    LEDsOFF(26,0) # red 2 OFF
-    LEDsON(25,13) # red 1 and green 2 ON
+    LEDs_OFF(26,0) # red 2 OFF
+    LEDs_ON(25,13) # red 1 and green 2 ON
     activeCrosswalk()
     time.sleep(5)
 
-    LEDsOFF(13,0) # green 2 OFF
-    LEDsON(19,0) # yellow 2 ON
+    LEDs_OFF(13,0) # green 2 OFF
+    LEDs_ON(19,0) # yellow 2 ON
     time.sleep(2)
-    LEDsOFF(22,0) # in case button was pushed
+    LEDs_OFF(22,0) # in case button was pushed
     buzzer.off() # in case button was pushed
 
-    IntermittentLEDs(19,0) # intermittent yellow 2
+    Intermittent_LEDs(19,0) # intermittent yellow 2
 
-def CaptureSignal(channel):
+def CaptureSignal(channel): # capture the signal if the button was pushed
     global sig
     sig = 1
 
-def activeCrosswalk():
+def activeCrosswalk(): # active the crosswalk 
     global sig 
     if sig == True:
-        LEDsON(22,0)
+        LEDs_ON(22,0)
         buzzer.beep()
-        sig = False
-        
+        sig = False        
 
-def LEDsON(led1, led2): # ON led or leds
+def LEDs_ON(led1, led2): # ON led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.HIGH)
         GPIO.output(led2, GPIO.HIGH)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.HIGH)
 
-def LEDsOFF(led1, led2): # OFF led or leds
+def LEDs_OFF(led1, led2): # OFF led or leds
     if led1 != 0 and led2 !=0:     
         GPIO.output(led1, GPIO.LOW)
         GPIO.output(led2, GPIO.LOW)
     elif led1 != 0 and led2 == 0:
         GPIO.output(led1, GPIO.LOW)
 
-def IntermittentLEDs(led1, led2): # ON intermittent led or leds
+def Intermittent_LEDs(led1, led2): # ON intermittent led or leds
     if led1 != 0 and led2 !=0:
         for i in range(5):
-            LEDsON(led1,led2)
+            LEDs_ON(led1,led2)
             time.sleep(.5)
-            LEDsOFF(led1,led2)
+            LEDs_OFF(led1,led2)
             time.sleep(.5)
     elif led1 != 0 and led2 == 0:
         for i in range(5):
-            LEDsON(led1,0)
+            LEDs_ON(led1,0)
             time.sleep(.5)
-            LEDsOFF(led1,0)
+            LEDs_OFF(led1,0)
             time.sleep(.5)
 
 
