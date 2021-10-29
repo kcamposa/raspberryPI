@@ -28,26 +28,32 @@ def ChangingLights():
 
     GPIO.output(portList, GPIO.LOW)
 
+    print("green 1 -- red 2 ON")
     LEDs_ON(23,26) # green 1 and red 2 ON
     time.sleep(5)
 
+    print("green 1 OFF -- yellow 1 ON")
     LEDs_OFF(23,0) # green 1 OFF
     LEDs_ON(24,0) # yellow 1 ON
     time.sleep(2)
 
+    print("intermittent yellow 1")
     Intermittent_LEDs(24,0) # intermittent yellow 1
-
+    
+    print("red 2 OFF -- red 1 ON -- green 2 ON")
     LEDs_OFF(26,0) # red 2 OFF
     LEDs_ON(25,13) # red 1 and green 2 ON
     activeCrosswalk()
     time.sleep(5)
 
+    print("green 2 OFF -- yellow 2 ON")
     LEDs_OFF(13,0) # green 2 OFF
     LEDs_ON(19,0) # yellow 2 ON
     time.sleep(2)
     LEDs_OFF(22,0) # in case button was pushed
     buzzer.off() # in case button was pushed
 
+    print("intermittent yellow 2")
     Intermittent_LEDs(19,0) # intermittent yellow 2
 
 def CaptureSignal(channel): # capture the signal if the button was pushed
@@ -57,6 +63,7 @@ def CaptureSignal(channel): # capture the signal if the button was pushed
 def activeCrosswalk(): # active the crosswalk 
     global sig 
     if sig == 1:
+        print("Actived Crosswalk")
         LEDs_ON(22,0)
         buzzer.beep()
         sig = 0        
