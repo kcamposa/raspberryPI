@@ -71,12 +71,12 @@ def alarmOFF():
 def motionON(channel):
     global move
     move = 1
-    print("Motion: ", move)
+    print("Alert!!...Movement detected in your room. ")
 
 def motionOFF():
     global move
     move = 0
-    print("Motion: ", move)
+    print("Movement sensor was reseted.")
 
 def botfunction(value):
     chatID = value['chat']['id']
@@ -96,20 +96,19 @@ def botfunction(value):
     elif command == '/Distance':
         if sig == 1 and move == 1:
             d = distance()
-            connBot.sendMessage(chatID, str("Distance: ") + str(d) + str(" cm."))
-            #connBot.sendMessage(chatID, str("Movement: ") + str(move))
+            if d > 0 and d < 50:
+                connBot.sendMessage(chatID, str("Alert!!...Your computer isn't save, distance: ") + str(d) + str(" cm."))
+                urllib.request.urlopen(URL+'&field4=%s'%(1))
+            else:
+                connBot.sendMessage(chatID, str("Alert!!...Your computer is save, distance: ") + str(d) + str(" cm."))
+                urllib.request.urlopen(URL+'&field4=%s'%(0))
             motionOFF()
         else:
-            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))
-        #if d > 0 and d < 30:
-        #    urllib.request.urlopen(URL+'&field4=%s'%(1))
-        #else:
-        #    urllib.request.urlopen(URL+'&field4=%s'%(0))
+            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))  
         
 
 token = '2123194698:AAG1O395gfxg1fcbPbVtXQhQKJq5CeCXhCg'
 connBot = telepot.Bot(token)
-#print(connBot.getMe())
 MessageLoop(connBot, botfunction).run_as_thread()
 
 setup()
