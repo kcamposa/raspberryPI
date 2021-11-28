@@ -98,10 +98,10 @@ def botfunction(value):
             d = distance()
             if d > 0 and d < 50:
                 connBot.sendMessage(chatID, str("Alert!!...Your computer isn't save, distance: ") + str(d) + str(" cm."))
-                urllib.request.urlopen(URL+'&field4=%s'%(1))
+                urllib.request.urlopen(URL+'&field5=%s'%(1))
             else:
                 connBot.sendMessage(chatID, str("Alert!!...Your computer is save, distance: ") + str(d) + str(" cm."))
-                urllib.request.urlopen(URL+'&field4=%s'%(0))
+                urllib.request.urlopen(URL+'&field5=%s'%(0))
             motionOFF()
         else:
             connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))  
