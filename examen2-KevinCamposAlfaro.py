@@ -104,8 +104,7 @@ def botfunction(value):
                 urllib.request.urlopen(URL+'&field5=%s'%(0))
             motionOFF()
         else:
-            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))  
-        
+            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))     
 
 token = '2123194698:AAG1O395gfxg1fcbPbVtXQhQKJq5CeCXhCg'
 connBot = telepot.Bot(token)
