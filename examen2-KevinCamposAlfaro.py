@@ -32,7 +32,8 @@ def setup():
 def main():
     try:
         while True:
-            time.sleep(1)
+            time.sleep(60)
+            SafeZone()
     except KeyboardInterrupt:
             GPIO.cleanup()
             print("Finnish")
@@ -44,7 +45,18 @@ def LED_ON(led1):
 def LED_OFF(led1):
     GPIO.output(led1, GPIO.LOW)
 
+def SafeZone():
+    global move 
+    if move == 0:
+        connBot.sendMessage(2003138995, str("The zone es is safe. "))
+        print("The zone es is safe.")
+    else:
+        connBot.sendMessage(2003138995, str("The zone isn't safe. Movement detected some seconds ago."))
+        print("The zone isn't safe. Movement detected some seconds ago.")
+        motionOFF()
+
 def distance():
+
     time.sleep(1)
     GPIO.output(pinTRIG,GPIO.HIGH)
     time.sleep(0.00001)
@@ -56,29 +68,39 @@ def distance():
     tvuelo=tfin-tinicio
     distancia=tvuelo*vSon/2
     distancia=round(distancia,2)
-    return distancia
-
+    if distancia > 0 and distancia < 50:
+        connBot.sendMessage(2003138995, str("Alert!!...Your computer isn't save, distance: ") + str(distancia) + str(" cm."))
+    else:
+        connBot.sendMessage(2003138995, str("Alert!!...Your computer is save, distance: ") + str(distancia) + str(" cm."))
+        
 def alarmON():
     global sig
     sig = 1
     LED_ON(RedLED)
+    print("Alarm is ON now.")
+    connBot.sendMessage(2003138995, str("Alarm is ON now. "))
+    urllib.request.urlopen(URL+'&field5=%s'%(1))
 
 def alarmOFF():
     global sig
     sig = 0
     LED_OFF(RedLED)
+    print("Alarm is OFF now.")
+    connBot.sendMessage(2003138995, str("Alarm is OFF now. "))
+    urllib.request.urlopen(URL+'&field5=%s'%(0))
 
 def motionON(channel):
     global move
     move = 1
-    print("Alert!!...Movement detected in your room. ")
+    print("Alert!!...Movement detected in your room.")
+    connBot.sendMessage(2003138995, str("Alert!!...Movement detected in your room."))     
 
 def motionOFF():
     global move
     move = 0
-    print("Movement sensor was reseted.")
 
 def botfunction(value):
+    
     chatID = value['chat']['id']
     command = value['text']
     print(command)
@@ -87,28 +109,19 @@ def botfunction(value):
         connBot.sendMessage(chatID, str("\n OPTIONS: \n /alarmON \n /alarmOFF \n /Distance"))
     elif command == '/alarmON':
         alarmON()
-        connBot.sendMessage(chatID, str("Alarm is ON now. "))
-        print("Alarm is ON now.")
     elif command == '/alarmOFF':
         alarmOFF()
-        connBot.sendMessage(chatID, str("Alarm is OFF now. "))
-        print("Alarm is OFF now.")
     elif command == '/Distance':
-        if sig == 1 and move == 1:
-            d = distance()
-            if d > 0 and d < 50:
-                connBot.sendMessage(chatID, str("Alert!!...Your computer isn't save, distance: ") + str(d) + str(" cm."))
-                urllib.request.urlopen(URL+'&field5=%s'%(1))
-            else:
-                connBot.sendMessage(chatID, str("Alert!!...Your computer is save, distance: ") + str(d) + str(" cm."))
-                urllib.request.urlopen(URL+'&field5=%s'%(0))
+        if sig == 1:
+            distance()
             motionOFF()
         else:
-            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF or the sensor has not captured motion. "))     
+            connBot.sendMessage(chatID, str("Sorry, the alarm is OFF."))     
 
 token = '2123194698:AAG1O395gfxg1fcbPbVtXQhQKJq5CeCXhCg'
 connBot = telepot.Bot(token)
 MessageLoop(connBot, botfunction).run_as_thread()
+
 
 setup()
 main()
