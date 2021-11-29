@@ -68,7 +68,7 @@ def distance():
     distancia=tvuelo*vSon/2
     distancia=round(distancia,2)
     return distancia
-    
+
 def alarmON():
     global sig
     sig = 1
@@ -90,7 +90,7 @@ def motionON(channel):
     move = 1
     d = distance()
     if d > 0 and d < 50:
-        connBot.sendMessage(2003138995, str("Alert!!...Your computer isn't save, distance: ") + str(d) + str(" cm."))
+        connBot.sendMessage(2003138995, str("Alert!!...Your computer isn't safe, distance: ") + str(d) + str(" cm."))
         print("Alert!!...Your computer isn't save, distance: ", d)
 
     print("Alert!!...Movement detected in your room.")    
@@ -115,9 +115,9 @@ def botfunction(value):
         if sig == 1:
             d = distance()
             if d > 0 and d < 50:
-                connBot.sendMessage(2003138995, str("Alert!!...Your computer isn't save, distance: ") + str(d) + str(" cm."))
+                connBot.sendMessage(2003138995, str("Alert!!...Your computer isn't safe, distance: ") + str(d) + str(" cm."))
             else:
-                connBot.sendMessage(2003138995, str("Alert!!...Your computer is save, distance: ") + str(d) + str(" cm."))
+                connBot.sendMessage(2003138995, str("Alert!!...Your computer is safe, distance: ") + str(d) + str(" cm."))
             motionOFF()
         else:
             connBot.sendMessage(chatID, str("Sorry, the alarm is OFF."))     
