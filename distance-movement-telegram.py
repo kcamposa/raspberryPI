@@ -56,7 +56,6 @@ def SafeZone():
         motionOFF()
 
 def distance():
-
     time.sleep(1)
     GPIO.output(pinTRIG,GPIO.HIGH)
     time.sleep(0.00001)
@@ -69,6 +68,7 @@ def distance():
     distancia=tvuelo*vSon/2
     distancia=round(distancia,2)
     return distancia
+    
 def alarmON():
     global sig
     sig = 1
